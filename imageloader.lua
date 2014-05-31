@@ -115,7 +115,7 @@ minetest.register_chatcommand("loadimage", {
 		print(("Schematic created: size: %dx%dx%d"):format(schem.size.x, schem.size.y, schem.size.z))
 		minetest.chat_send_player(name, "[imageloader] Placing schematic...")
 		local pos = minetest.get_player_by_name(name):getpos()
-		minetest.place_schematic(pos, schem)
+		minetest.place_schematic(pos, schem, 0)
 		minetest.chat_send_player(name, "[imageloader] DONE!")
 	end,
 })
