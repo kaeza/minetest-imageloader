@@ -7,3 +7,4 @@ dofile(MP.."/palette.lua")
 dofile(MP.."/imageloader.lua")
 
 dofile(MP.."/loader_bmp.lua")
+dofile(MP.."/loader_png.lua")

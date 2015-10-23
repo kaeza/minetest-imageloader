@@ -10,65 +10,39 @@ local bmp_meta = {
 --[[
 typedef = {
 	description = "FOO File",
-	check = func(file), --> bool
-	load = func(file), --> table or (nil, errormsg)
+	check = func(filename), --> bool
+	load = func(filename), --> table or (nil, errormsg)
 }
 ]]
 
 function imageloader.register_type(def)
-
 	types[#types + 1] = def
-
 end
 
-local function find_loader(file)
-
+local function find_loader(filename)
 	for _,def in ipairs(types) do
-
-		file:seek("set", 0)
-		local r = def.check(file)
-		file:seek("set", 0)
-
+		local r = def.check(filename)
 		if r then
 			return def
 		end
-
 	end
-
 	return nil, "imageloader: unknown file type"
-
 end
 
 function imageloader.load(filename)
-
-	local f, e = io.open(filename)
-	if not f then return nil, "imageloader: "..e end
-
-	local def, e = find_loader(f)
+	local def, e = find_loader(filename)
 	if not def then return nil, e end
-
-	local r, e = def.load(f)
-
-	f:close()
-
+	local r, e = def.load(filename)
 	if r then
 		r = setmetatable(r, bmp_meta)
 	end
-
 	return r, e
-
 end
 
 function imageloader.type(filename)
-
-	local f, e = io.open(filename)
-	if not f then return nil, "imageloader: "..e end
-
-	local def, e = find_loader(f)
+	local def, e = find_loader(filename)
 	if not def then return nil, e end
-
 	return def.description
-
 end
 
 function imageloader.to_schematic(bmp, pal)

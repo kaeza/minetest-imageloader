@@ -214,7 +214,7 @@ local function load_bmp_pf(f)
 
 	if not infoheader then return nil, e end
 
-	bmp = {
+	local bmp = {
 		bpp = bpp,
 		w = infoheader.biWidth,
 		h = math.abs(infoheader.biHeight),
@@ -226,8 +226,24 @@ local function load_bmp_pf(f)
 
 end
 
+local function check_bmp(filename)
+	local f, e = io.open(filename, "rb")
+	if not f then return nil, e end
+	local r, e = get_bmp_infoheader(f)
+	f:close()
+	return r, e
+end
+
+local function load_bmp(filename)
+	local f, e = io.open(filename, "rb")
+	if not f then return nil, e end
+	local r, e = load_bmp_pf(f)
+	f:close()
+	return r, e
+end
+
 imageloader.register_type({
 	description = "Windows or OS/2 Bitmap",
-	load = load_bmp_pf,
-	check = get_bmp_infoheader,
+	load = load_bmp,
+	check = check_bmp,
 })
