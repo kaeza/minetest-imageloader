@@ -1,0 +1,19 @@
+{
+  "name": "imageloader",
+  "description": "Load raster images into the map. Supports BMP and PNG files.",
+  "keywords": [
+    "images",
+    "image",
+    "terrain"
+  ],
+  "homepage": "http://github.com/kaeza/minetest-imageloader.git",
+  "screenshots": [
+    "https://dl.dropboxusercontent.com/u/100008207/screenshot_852315803.jpg",
+    "https://dl.dropboxusercontent.com/u/100008207/screenshot_851420819.jpg",
+    "https://dl.dropboxusercontent.com/u/100008207/minetest/screenshot_597616600.jpg"
+  ],
+  "authors": [
+    "Diego Martínez <lkaezadl3@yahoo.com>"
+  ],
+  "license": "BSD 2-Clause"
+}
